@@ -65,6 +65,7 @@ export default function calcindice() {
       <View>
         <Image
           source={require('./assets/img-calcindice.png')}
+          style={estilos.tabela}
         />
       </View>
     </SafeAreaView>
@@ -72,11 +73,17 @@ export default function calcindice() {
 }
 
 const estilos = StyleSheet.create({
+  tabela: {
+    width: '100%',
+    resizeMode: 'contain',
+    marginTop: 57
+  },
   corpo: {
     padding: 10
   },
   bloco: {
-    marginBottom: 20
+    marginBottom: 20,
+    width: '100%'
   },
   txt: {
     width: '100%',
