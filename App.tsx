@@ -1,12 +1,25 @@
 import React, { useState } from "react";
-import { Text, View, SafeAreaView, StyleSheet, TextInput, TouchableHighlight } from "react-native";
+import { Text, View, SafeAreaView, StyleSheet, TextInput, TouchableHighlight, Alert } from "react-native";
 
 export default function calcindice() {
 
   const [peso, setPeso] = useState<number>(0);
-  const [altura, setAltura] = useState(0)
-  const [resultado, setResultado] = useState(0)
+  const [altura, setAltura] = useState<number>(0);
+  const [resultado, setResultado] = useState<string>('');
+  const calcImc = () => {
+    if (peso === 0 || !peso) {
+      Alert.alert('informe o Peso')
+      return;
+    }
+    if (altura === 0 || !altura) {
+      Alert.alert('informe a Altura')
+      return;
+    }
 
+    //const r = peso/(Math.pow(altura,2))
+    const r = peso / (altura * altura);
+    setResultado(r.toFixed(1))
+  }
 
   return (
     <SafeAreaView style={estilos.corpo}>
@@ -18,7 +31,7 @@ export default function calcindice() {
         <Text>Informe seu Peso:</Text>
         <TextInput
           autoFocus={true}
-          keyboardType={'numeric'}
+          keyboardType={'decimal-pad'}
           value={peso.toString()}
           onChangeText={text => setPeso(parseFloat(text))}
           style={estilos.txt}
@@ -33,10 +46,12 @@ export default function calcindice() {
           onChangeText={text => setAltura(parseFloat(text))}
           style={estilos.txt}
         />
+
       </View>
       <View style={estilos.bloco}>
         <TouchableHighlight
           style={estilos.btnCalc}
+          onPress={calcImc}
         >
           <Text style={estilos.txtBtn}>
             Calcular IMC
@@ -44,7 +59,7 @@ export default function calcindice() {
         </TouchableHighlight>
       </View>
       <View style={estilos.bloco}>
-        <Text>Resultado: </Text>
+        <Text>Resultado:{resultado} </Text>
       </View>
     </SafeAreaView>
   );
@@ -78,5 +93,7 @@ const estilos = StyleSheet.create({
   }
 
 })
+
+
 
 
