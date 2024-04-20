@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, SafeAreaView, StyleSheet, TextInput, TouchableHighlight, Alert } from "react-native";
+import { Text, View, SafeAreaView, StyleSheet, TextInput, TouchableHighlight, Alert, Image } from "react-native";
 
 export default function calcindice() {
 
@@ -60,6 +60,12 @@ export default function calcindice() {
       </View>
       <View style={estilos.bloco}>
         <Text>Resultado:{resultado} </Text>
+      </View>
+
+      <View>
+        <Image
+          source={require('./assets/img-calcindice.png')}
+        />
       </View>
     </SafeAreaView>
   );
