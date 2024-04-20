@@ -1,118 +1,82 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React, { useState } from "react";
+import { Text, View, SafeAreaView, StyleSheet, TextInput, TouchableHighlight } from "react-native";
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+export default function calcindice() {
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+  const [peso, setPeso] = useState<number>(0);
+  const [altura, setAltura] = useState(0)
+  const [resultado, setResultado] = useState(0)
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
+    <SafeAreaView style={estilos.corpo}>
+      <View style={estilos.bloco}>
+        <Text>Calculadora de IMC</Text>
+      </View>
+
+      <View style={estilos.bloco}>
+        <Text>Informe seu Peso:</Text>
+        <TextInput
+          autoFocus={true}
+          keyboardType={'numeric'}
+          value={peso.toString()}
+          onChangeText={text => setPeso(parseFloat(text))}
+          style={estilos.txt}
+        />
+      </View>
+      <View style={estilos.bloco}>
+        <Text>Informe sua Altura:</Text>
+        <TextInput
+          autoFocus={false}
+          keyboardType={'numeric'}
+          value={altura.toString()}
+          onChangeText={text => setAltura(parseFloat(text))}
+          style={estilos.txt}
+        />
+      </View>
+      <View style={estilos.bloco}>
+        <TouchableHighlight
+          style={estilos.btnCalc}
+        >
+          <Text style={estilos.txtBtn}>
+            Calcular IMC
+          </Text>
+        </TouchableHighlight>
+      </View>
+      <View style={estilos.bloco}>
+        <Text>Resultado: </Text>
+      </View>
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+const estilos = StyleSheet.create({
+  corpo: {
+    padding: 10
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  bloco: {
+    marginBottom: 20
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  txt: {
+    width: '100%',
+    borderWidth: 1,
+    borderColor: '#000',
+    padding: 10,
+    borderRadius: 10
   },
-  highlight: {
-    fontWeight: '700',
+  btnCalc: {
+    backgroundColor: '#048',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+    borderRadius: 20
   },
-});
+  txtBtn: {
+    fontSize: 15,
+    textTransform: 'uppercase',
+    color: '#fff'
+  }
 
-export default App;
+})
+
+
